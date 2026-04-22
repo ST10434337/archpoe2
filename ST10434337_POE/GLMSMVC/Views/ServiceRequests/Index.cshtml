@@ -1,0 +1,50 @@
+﻿@model GLMSMVC.Models.ViewModels.ServiceRequestIndexViewModel
+
+@{
+    ViewData["Title"] = "Service Requests";
+}
+
+<h1>Service Requests</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Contract Id</th>
+            <th>Client Name</th>
+            <th>Contract Status</th>
+            <th>Description</th>
+            <th>Cost (ZAR)</th>
+            <th>SR Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.ContractId</td>
+                <td>@item.ClientName</td>
+                <td>@item.ContractStatus</td>
+                <td>@item.Description</td>
+                <td>@item.CostZar.ToString("N2")</td>
+                <td>@item.ServiceRequestStatus</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

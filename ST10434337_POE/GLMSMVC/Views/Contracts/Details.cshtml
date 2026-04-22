@@ -1,0 +1,48 @@
+﻿@model GLMSMVC.Models.ViewModels.ContractDetailsViewModel
+
+@{
+    ViewData["Title"] = "Contract Details";
+}
+
+<h1>Contract Details</h1>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<dl class="row">
+    <dt class="col-sm-3">Client Name</dt>
+    <dd class="col-sm-9">@Model.ClientName</dd>
+
+    <dt class="col-sm-3">Region</dt>
+    <dd class="col-sm-9">@Model.Region</dd>
+
+    <dt class="col-sm-3">Start Date</dt>
+    <dd class="col-sm-9">@Model.StartDate?.ToString("yyyy-MM-dd")</dd>
+
+    <dt class="col-sm-3">End Date</dt>
+    <dd class="col-sm-9">@Model.EndDate?.ToString("yyyy-MM-dd")</dd>
+
+    <dt class="col-sm-3">Service Level</dt>
+    <dd class="col-sm-9">@Model.ServiceLevel</dd>
+
+    <dt class="col-sm-3">Contract Status</dt>
+    <dd class="col-sm-9">@Model.ContractStatus</dd>
+
+    <dt class="col-sm-3">Signed Agreement</dt>
+    <dd class="col-sm-9">
+        @if (Model.HasFile)
+        {
+            <a asp-action="DownloadFile" asp-route-id="@Model.Id" class="btn btn-sm btn-success">Download PDF</a>
+        }
+        else
+        {
+            <span>No file uploaded.</span>
+        }
+    </dd>
+</dl>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
